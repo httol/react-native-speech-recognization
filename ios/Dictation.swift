@@ -30,7 +30,7 @@ class Dictation: RCTEventEmitter {
     }
     
     open override func supportedEvents() -> [String] {
-        ["onSuccess","onFailure"]
+        ["onStart","onEnd","onSuccess","onFailure"]
     }
     
     override func startObserving() {

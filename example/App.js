@@ -10,7 +10,7 @@
 
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import RNDictation from 'react-native-dictation';
+import RNDictation, {dictationEvent} from 'react-native-dictation';
 
 export default class App extends Component<{}> {
   state = {
@@ -20,9 +20,16 @@ export default class App extends Component<{}> {
 
   constructor(props) {
     super(props);
-    RNDictation.addEventListener('onSuccess', (text) => {
+  }
+
+  componentDidMount() {
+    RNDictation.addEventListener(dictationEvent.onSuccess, (text) => {
       this.setState({message: text});
     });
+  }
+
+  componentWillUnmount() {
+    RNDictation.removeEventListener();
   }
 
   render() {

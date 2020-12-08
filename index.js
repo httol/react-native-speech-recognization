@@ -1,6 +1,11 @@
 import { DeviceEventEmitter, NativeEventEmitter, NativeModules, Platform } from "react-native";
 const { Dictation } = NativeModules;
 
+export const dictationEvent={
+    onSuccess:"onSuccess",
+    onFailure:"onFailure"
+}
+
 let subscription;
 export default RNDictation = {
   startRecord() {
@@ -12,13 +17,13 @@ export default RNDictation = {
   addEventListener(event, callback) {
     const DictationEmitter = Platform.OS === "ios" ? new NativeEventEmitter(Dictation) : DeviceEventEmitter;
     switch (event) {
-      case "onFailure":
-        subscription = DictationEmitter.addListener("onFailure", (e) =>
+      case dictationEvent.onSuccess:
+        subscription = DictationEmitter.addListener(dictationEvent.onSuccess, (e) =>
           callback(e)
         );
         break;
-      case "onSuccess":
-        subscription = DictationEmitter.addListener("onSuccess", (e) =>
+      case dictationEvent.onFailure:
+        subscription = DictationEmitter.addListener(dictationEvent.onFailure, (e) =>
           callback(e)
         );
         break;
@@ -27,8 +32,8 @@ export default RNDictation = {
     }
   },
   removeEventListener() {
-    if (subscription) {
-      subscription.remove();
-    }
-  },
+      if(subscription){
+        subscription.remove();
+      }
+  }
 };
