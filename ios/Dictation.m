@@ -1,13 +1,7 @@
-#import "Dictation.h"
+#import <React/RCTBridgeModule.h>
 
-@implementation Dictation
-
-RCT_EXPORT_MODULE()
-
-RCT_EXPORT_METHOD(sampleMethod:(NSString *)stringArgument numberParameter:(nonnull NSNumber *)numberArgument callback:(RCTResponseSenderBlock)callback)
-{
-    // TODO: Implement some actually useful functionality
-    callback(@[[NSString stringWithFormat: @"numberArgument: %@ stringArgument: %@", numberArgument, stringArgument]]);
-}
-
+@interface RCT_EXTERN_MODULE(Dictation,NSObject)
+   RCT_EXTERN_METHOD(startRecord)
+   RCT_EXTERN_METHOD(endRecord)
 @end
+

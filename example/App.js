@@ -8,30 +8,40 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import Dictation from 'react-native-dictation';
+import React, {Component} from 'react';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import RNDictation from 'react-native-dictation';
 
 export default class App extends Component<{}> {
   state = {
     status: 'starting',
-    message: '--'
+    message: '--',
   };
-  componentDidMount() {
-    Dictation.sampleMethod('Testing', 123, (message) => {
-      this.setState({
-        status: 'native callback received',
-        message
-      });
+
+  constructor(props) {
+    super(props);
+    RNDictation.addEventListener('onSuccess', (text) => {
+      this.setState({message: text});
     });
   }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>☆Dictation example☆</Text>
-        <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
-        <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
-        <Text style={styles.instructions}>{this.state.message}</Text>
+        <Button
+          title="start"
+          onPress={() => {
+            RNDictation.startRecord();
+          }}
+        />
+
+        <Button
+          title="end"
+          onPress={() => {
+            RNDictation.endRecord();
+          }}
+        />
+        <Text>{this.state.message}</Text>
       </View>
     );
   }
