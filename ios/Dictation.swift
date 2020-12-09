@@ -46,6 +46,11 @@ class Dictation: RCTEventEmitter {
         if self.isRecording {
             return
         }
+        
+        if self.hasListener {
+            self.emitter.sendEvent(withName: "onStart", body: nil)
+        }
+        
         self.isRecording = true
         let node = self.audioEngine.inputNode
         
@@ -96,10 +101,13 @@ class Dictation: RCTEventEmitter {
             audioEngine.stop()
             recognitionTask?.cancel()
             self.isRecording = false
+            if self.hasListener {
+                self.emitter.sendEvent(withName: "onEnd", body: nil)
+            }
         }
     }
     
     @objc override static func requiresMainQueueSetup() -> Bool {
-        return false
+        return true
     }
 }

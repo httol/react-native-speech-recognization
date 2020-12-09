@@ -10,11 +10,12 @@
 
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import RNDictation, {dictationEvent} from 'react-native-dictation';
+// import RNDictation, {dictationEvent} from 'react-native-dictation';
+import {DictationPanel} from 'react-native-dictation';
 
 export default class App extends Component<{}> {
   state = {
-    status: 'starting',
+    status: '--',
     message: '--',
   };
 
@@ -23,19 +24,25 @@ export default class App extends Component<{}> {
   }
 
   componentDidMount() {
-    RNDictation.addEventListener(dictationEvent.onSuccess, (text) => {
-      this.setState({message: text});
-    });
+    // RNDictation.addEventListener(dictationEvent.onSuccess, (text) => {
+    //   this.setState({message: text});
+    // });
+    // RNDictation.addEventListener(dictationEvent.onStart, () => {
+    //   this.setState({status: 'start'});
+    // });
+    // RNDictation.addEventListener(dictationEvent.onEnd, () => {
+    //   this.setState({status: 'end'});
+    // });
   }
 
   componentWillUnmount() {
-    RNDictation.removeEventListener();
+    // RNDictation.removeEventListener();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Button
+        {/* <Button
           title="start"
           onPress={() => {
             RNDictation.startRecord();
@@ -48,7 +55,9 @@ export default class App extends Component<{}> {
             RNDictation.endRecord();
           }}
         />
-        <Text>{this.state.message}</Text>
+        <Text>{this.state.status}</Text>
+        <Text>{this.state.message}</Text> */}
+        <DictationPanel />
       </View>
     );
   }
