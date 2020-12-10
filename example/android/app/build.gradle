@@ -187,6 +187,11 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    implementation 'com.huawei.hiai.hiai-engine:huawei-hiai-vision:11.0.1.300'
+    implementation 'com.huawei.hiai.hiai-engine:huawei-hiai-pdk:11.0.1.300'
+    implementation 'com.huawei.hiai.hiai-engine:huawei-hiai-nlu:11.0.1.300'
+    implementation 'com.huawei.hiai.hiai-engine:huawei-hiai-asr:11.0.1.300'
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }

@@ -11,7 +11,7 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 // import RNDictation, {dictationEvent} from 'react-native-dictation';
-import {DictationPanel} from 'react-native-dictation';
+import {DictationPanel, RNDictation} from 'react-native-dictation';
 
 export default class App extends Component<{}> {
   state = {
@@ -58,6 +58,13 @@ export default class App extends Component<{}> {
         <Text>{this.state.status}</Text>
         <Text>{this.state.message}</Text> */}
         <DictationPanel />
+        <Button
+          title="授权"
+          onPress={() => {
+            RNDictation.sampleMethod();
+          }}
+        />
+        {/* <Text>111</Text> */}
       </View>
     );
   }

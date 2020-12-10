@@ -31,6 +31,7 @@ buildscript {
         repositories {
             google()
             jcenter()
+            mavenCentral()
         }
         dependencies {
             classpath 'com.android.tools.build:gradle:3.4.1'
@@ -68,10 +69,16 @@ repositories {
     }
     google()
     jcenter()
+
 }
 
 dependencies {
     //noinspection GradleDynamicVersion
+    implementation 'com.huawei.hiai.hiai-engine:huawei-hiai-vision:11.0.1.300'
+    implementation 'com.huawei.hiai.hiai-engine:huawei-hiai-pdk:11.0.1.300'
+    implementation 'com.huawei.hiai.hiai-engine:huawei-hiai-nlu:11.0.1.300'
+    implementation 'com.huawei.hiai.hiai-engine:huawei-hiai-asr:11.0.1.300'
+    implementation 'com.android.support:appcompat-v7:28.+'
     implementation 'com.facebook.react:react-native:+'  // From node_modules
 }
 

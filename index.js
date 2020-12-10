@@ -1,18 +1,17 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { DeviceEventEmitter,
-     NativeEventEmitter, 
+import React, { useEffect, useState } from 'react';
+import { 
+    DeviceEventEmitter,
+    NativeEventEmitter, 
     NativeModules, 
     Platform,
     View,
-    Text, 
-    Button,
-Image, 
-TouchableWithoutFeedback,
-TouchableNativeFeedback,
-TextInput,StyleSheet, Modal, Keyboard} from "react-native";
+    Image, 
+    TouchableWithoutFeedback,
+    TouchableNativeFeedback,
+    TextInput,StyleSheet, Modal} from "react-native";
 import TimerButton from "./src/TimerButton";
 const { Dictation } = NativeModules;
-
+console.log(Dictation)
 export const dictationEvent={
     onStart:"onStart",
     onEnd:"onEnd",
@@ -22,6 +21,9 @@ export const dictationEvent={
 
 let subscription;
 export const RNDictation = {
+    sampleMethod(){
+        Dictation.sampleMethod("",1,()=>{});
+    },
   startRecord() {
     Dictation.startRecord();
   },
@@ -92,17 +94,14 @@ export const DictationPanel = ()=>{
     useEffect(()=>{
         if(visible === false){
            if(starting){
-               console.log("stop")
                stopRecord();
            }
         }
     },[visible])
 
     const startRecord = ()=>{
-        RNDictation.addEventListener(dictationEvent.onSuccess,(text)=>{
-                setMessage(text)
-            });
         RNDictation.startRecord();
+        RNDictation.addEventListener(dictationEvent.onSuccess,(text)=>{setMessage(text)});
     }
 
     const stopRecord=()=>{
@@ -136,28 +135,30 @@ export const DictationPanel = ()=>{
     const onRequestClose=()=>{
     }
 
-    return <View style={{position:'absolute',top:30}} >
-        <TouchableNativeFeedback onPress={show} title="Start">
-           <Image style={{width:20,height:30}} source={require('./asserts/icons/micro.png')}/>
-        </TouchableNativeFeedback>
-        <Modal transparent={true} animationType='slide' visible={visible===true} {...{onRequestClose}}>
-             <>
-                <TouchableWithoutFeedback onPress={onDismiss}>
-                    <View style={{position:'absolute',...StyleSheet.absoluteFillObject,backgroundColor:'black',opacity:.3}}></View>
-                </TouchableWithoutFeedback>
-                <View style={{padding:20,position:'absolute',height:'45%',borderTopLeftRadius:20,borderTopRightRadius:20,bottom:0,justifyContent:'flex-start',backgroundColor:'white',width:'100%',}}> 
-                    <View style={{flex:1}}>
-                        <TextInput 
-                            value={message}  
-                            style={{fontSize:16,height:'100%'}}
-                            placeholder={starting?"请说，我在聆听...":"点击麦克风，开始说话..."}
-                            editable={false} 
-                            numberOfLines={10}
-                            multiline={true}/>
+    return (
+        <View style={{position:'absolute',top:30}} >
+            <TouchableNativeFeedback onPress={show} title="Start">
+            <Image style={{width:20,height:30}} source={require('./asserts/icons/micro.png')}/>
+            </TouchableNativeFeedback>
+            <Modal transparent={true} animationType='slide' visible={visible===true} {...{onRequestClose}}>
+                <>
+                    <TouchableWithoutFeedback onPress={onDismiss}>
+                        <View style={{position:'absolute',...StyleSheet.absoluteFillObject,backgroundColor:'black',opacity:.3}}></View>
+                    </TouchableWithoutFeedback>
+                    <View style={{padding:20,position:'absolute',height:'45%',borderTopLeftRadius:20,borderTopRightRadius:20,bottom:0,justifyContent:'flex-start',backgroundColor:'white',width:'100%',}}> 
+                        <View style={{flex:1,}}>
+                            <TextInput 
+                                value={message}  
+                                style={{textAlignVertical:'top',fontSize:16,height:'100%',includeFontPadding:false}}
+                                placeholder={starting?"请说，我在聆听...":"点击麦克风，开始说话..."}
+                                editable={false} 
+                                numberOfLines={10}
+                                multiline={true}/>
+                        </View>
+                        <TimerButton style={{alignSelf:'center'}} timeout={20} active={starting} {...{onStart}} {...{onClose}}/>
                     </View>
-                    <TimerButton style={{alignSelf:'center'}} timeout={20} active={starting} {...{onStart}} {...{onClose}}/>
-                </View>
-              </>
-        </Modal>
-    </View>
+                </>
+            </Modal>
+        </View>
+    )
 }
