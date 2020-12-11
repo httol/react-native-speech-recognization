@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { 
     View,
     Image, 
-    TouchableWithoutFeedback,
     TouchableNativeFeedback,
     TextInput,StyleSheet, Modal} from "react-native";
 import TimerButton from "./TimerButton";
@@ -73,9 +72,9 @@ export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
             </TouchableNativeFeedback>
             <Modal transparent={true} animationType='slide' visible={visible===true} {...{onRequestClose}}>
                 <>
-                    <TouchableWithoutFeedback onPress={onDismiss}>
+                    <TouchableNativeFeedback onPress={onDismiss}>
                         <View style={{position:'absolute',...StyleSheet.absoluteFillObject,backgroundColor:'black',opacity:.3}}></View>
-                    </TouchableWithoutFeedback>
+                    </TouchableNativeFeedback>
                     <View style={{paddingHorizontal:20,paddingVertical:10,position:'absolute',height:'45%',borderTopLeftRadius:20,borderTopRightRadius:20,bottom:0,justifyContent:'flex-start',backgroundColor:'white',width:'100%',}}> 
                         <View style={{flex:1,}}>
                             <TextInput 

@@ -1,7 +1,7 @@
 {
   "name": "react-native-speech-recognization",
   "title": "React Native Speech Recognization",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "React Native speech recognization for both ios and Android, now only support local recognization",
   "main": "index.js",
   "files": [
@@ -15,11 +15,12 @@
     "asserts"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/httol/react-native-speech-recognization.git",
+    "url": "https://github.com/httol/react-native-speech-recognization.git",
     "baseUrl": "https://github.com/httol/react-native-speech-recognization"
   },
   "keywords": [
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "react": "^16.9.0",
-    "react-native": "^0.61.5"
+    "react-native": "^0.61.5",
+    "semantic-release": "^17.3.0"
   }
 }
