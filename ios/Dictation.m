@@ -3,5 +3,7 @@
 @interface RCT_EXTERN_MODULE(Dictation,NSObject)
    RCT_EXTERN_METHOD(startRecord)
    RCT_EXTERN_METHOD(endRecord)
+   RCT_EXTERN_METHOD(isSupport:(RCTPromiseResolveBlock)resolve
+                     rejecter:(RCTPromiseRejectBlock)reject)
 @end
 
