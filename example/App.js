@@ -9,62 +9,78 @@
  */
 
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  StyleSheet,
+  Dimensions,
+  TextInput,
+  View,
+  Text,
+  Alert,
+} from 'react-native';
 // import RNDictation, {dictationEvent} from 'react-native-dictation';
 import {DictationPanel, RNDictation} from 'react-native-dictation';
+
+const Space = () => <View style={{height: 20}} />;
 
 export default class App extends Component<{}> {
   state = {
     status: '--',
-    message: '--',
+    message: '',
   };
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    // RNDictation.addEventListener(dictationEvent.onSuccess, (text) => {
-    //   this.setState({message: text});
-    // });
-    // RNDictation.addEventListener(dictationEvent.onStart, () => {
-    //   this.setState({status: 'start'});
-    // });
-    // RNDictation.addEventListener(dictationEvent.onEnd, () => {
-    //   this.setState({status: 'end'});
-    // });
-  }
-
-  componentWillUnmount() {
-    // RNDictation.removeEventListener();
-  }
-
   render() {
     return (
       <View style={styles.container}>
-        {/* <Button
-          title="start"
-          onPress={() => {
-            RNDictation.startRecord();
-          }}
-        />
-
-        <Button
-          title="end"
-          onPress={() => {
-            RNDictation.endRecord();
-          }}
-        />
         <Text>{this.state.status}</Text>
-        <Text>{this.state.message}</Text> */}
-        <DictationPanel />
-        <Button
-          title="授权"
-          onPress={() => {
-            RNDictation.sampleMethod();
+        <TextInput
+          multiline
+          numberOfLines={10}
+          textAlignVertical="top"
+          style={{
+            borderColor: '#666',
+            borderWidth: StyleSheet.hairlineWidth,
+            width: '90%',
+          }}
+          value={this.state.message}
+          onChangeText={(text) => {
+            this.setState({message: text});
           }}
         />
-        {/* <Text>111</Text> */}
+        <Space />
+        <Button
+          title="CheckIsSupport"
+          onPress={async () => {
+            try {
+              const result = await RNDictation.isSupport();
+              if (result) {
+                Alert.alert('Info', 'Support your device');
+              } else {
+                Alert.alert('Error', 'Do not Support your device!!!');
+              }
+            } catch (error) {
+              Alert.alert('Error', error.message);
+            }
+          }}
+        />
+        <Space />
+        <DictationPanel
+          onStartRecord={() => {
+            this.setState({status: 'Listening...'});
+          }}
+          onEndRecord={(text) => {
+            this.setState({status: 'Done'});
+          }}
+          onComplete={(text) => {
+            this.setState((prevState) => ({
+              message: `${prevState.message || ''}${text}`,
+            }));
+          }}
+        />
       </View>
     );
   }
