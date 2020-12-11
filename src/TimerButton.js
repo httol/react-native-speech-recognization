@@ -1,87 +1,34 @@
-import React, { useEffect, useRef } from 'react';
-import { Text, View,StyleSheet, TouchableNativeFeedback, Image } from 'react-native';
-
-
-const useInterval = (callback, delay) => {
-  const savedCallbackRef = useRef();
-
-  useEffect(() => {
-    savedCallbackRef.current = callback;
-  }, [callback]);
-
-  useEffect(() => {
-    const handler = (...args) => savedCallbackRef.current(...args);
-
-    if (delay !== null) {
-      const intervalId = setInterval(handler, delay);
-      return () => {
-          clearInterval(intervalId)
-      };
-    }
-  }, [delay]);
-};
-
-
-const initialState = {count:60}
-
-const reducer = (state,action)=>{
-    switch(action.type){
-        case "decrement":
-            return { count: state.count - 1 }; 
-        case "reset":
-            return { count: 0};
-        default:
-            throw new Error();
-    }
-}
+import React from 'react';
+import { View,StyleSheet, TouchableNativeFeedback, Image } from 'react-native';
 
 const TimerButton = ({
     onStart,
-    onClose,
+    onEnd,
     timeout,
-    style
+    style,
+    active
 }) => {
-    const [count, setCount] = React.useState(timeout);
-    const [active, setActive] = React.useState(undefined);
-    
-    useInterval(()=>{
-        if(active === false){
-            return;
-        } else if(active === true){
-            setCount(currentCount=>currentCount-1);
-        }
-    },1000)
-
-    const toggle=()=>{
-        setActive(!active)
+    const _onStart=()=>{
+        onStart&&onStart();
     }
 
-    useEffect(()=>{
-        if(active === true){
-            onStart&&onStart();
-        }else if(active === false){
-            setCount(timeout)
-            onClose&&onClose();
-        }
-    },[active]);
-
-    useEffect(()=>{
-        if(count === 0){
-            setCount(timeout)
-            setActive(false);
-        }
-    },[count]);
-
+    const _onEnd=()=>{
+        onEnd && onEnd();
+    }
+    
     return (
-        <View {...{style}} >
-            <TouchableNativeFeedback style={{flex:1,alignItems:'stretch'}} onPress={toggle}>
-                {active && count>0?(<View style={styles.container}>
-                    <Image style={{width:20,height:30,tintColor:'blue'}} source={require('../asserts/icons/micro.png')}/>
-                 </View>):
-                 (<View style={styles.container}>
-                    <Image style={{width:20,height:30,tintColor:'red'}} source={require('../asserts/icons/micro.png')}/>
-                 </View>)}
-            </TouchableNativeFeedback>
+        <View style={{...style,borderRadius:25}} >
+            {active ?(<TouchableNativeFeedback  style={{flex:1,alignItems:'stretch',borderRadius:25}} onPress={_onEnd}>
+                    <View style={{...styles.container,backgroundColor:'#5bd3c7',}}>
+                        <Image style={{width:20,height:30,tintColor:'#fff'}} source={require('../asserts/icons/micro.png')}/>
+                    </View>
+                 </TouchableNativeFeedback>):
+                 (<TouchableNativeFeedback onLongPress={_onStart} style={{flex:1,alignItems:'stretch'}}>
+                    <View style={{...styles.container,backgroundColor:'#999',}}>
+                        <Image style={{width:20,height:30,tintColor:'#ccc'}} source={require('../asserts/icons/micro.png')}/>
+                    </View>
+                 </TouchableNativeFeedback>)}
+            
         </View>
     )
 }
@@ -90,7 +37,6 @@ const styles = StyleSheet.create({
     container:{
         width:50,
         height:50,
-        backgroundColor:'yellow',
         borderRadius:25,
         justifyContent:'center',
         alignItems:'center'
