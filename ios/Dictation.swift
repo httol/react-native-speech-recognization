@@ -45,12 +45,11 @@ class Dictation: RCTEventEmitter {
     func isSupport(_ resolve:RCTPromiseResolveBlock ,rejecter reject:RCTPromiseRejectBlock) -> Void{
         let myRecognizer = SFSpeechRecognizer()
         if myRecognizer == nil || !myRecognizer!.isAvailable {
-            resolve(true)
-        } else {
-            
             let errorMsg = "Device Unsupport, make sure your iPhone version >= 10.0"
             let err: NSError = NSError(domain: errorMsg, code: 0, userInfo: nil)
             reject("Unsupport!!!", errorMsg, err)
+        } else {
+            resolve(true)
         }
     }
     

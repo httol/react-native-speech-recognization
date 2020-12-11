@@ -1,30 +1,30 @@
 {
-  "name": "react-native-dictation",
-  "title": "React Native Dictation",
-  "version": "1.0.0",
-  "description": "TODO",
+  "name": "react-native-speech-recognization",
+  "title": "React Native Speech Recognization",
+  "version": "1.0.1",
+  "description": "React Native speech recognization for both ios and Android, now only support local recognization",
   "main": "index.js",
   "files": [
     "README.md",
     "android",
     "index.js",
     "ios",
-    "react-native-dictation.podspec"
+    "react-native-speech-recognization.podspec"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-dictation.git",
-    "baseUrl": "https://github.com/github_account/react-native-dictation"
+    "url": "git+https://github.com/httol/react-native-speech-recognization.git",
+    "baseUrl": "https://github.com/httol/react-native-speech-recognization"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "httol",
+    "email": "895652159@qq.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",

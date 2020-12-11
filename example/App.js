@@ -18,8 +18,8 @@ import {
   Text,
   Alert,
 } from 'react-native';
-// import RNDictation, {dictationEvent} from 'react-native-dictation';
-import {DictationPanel, RNDictation} from 'react-native-dictation';
+// import RNDictation, {dictationEvent} from 'react-native-speech-recognization';
+import {DictationPanel, RNDictation} from 'react-native-speech-recognization';
 
 const Space = () => <View style={{height: 20}} />;
 

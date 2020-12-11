@@ -1,14 +1,33 @@
-# react-native-dictation
+# react-native-speech-recognization
 
 ## Getting started
-### README is constructing
-`$ npm install react-native-dictation --save`
 
-### Mostly automatic installation
+`yarn add react-native-speech-recognization`
 
-`$ react-native link react-native-dictation`
+Or
+
+`$ npm install react-native-speech-recognization --save`
+
+* ios
+
+rect-native >= 0.60
+
+You can run:
+```
+$ npx pod install
+```
+
+Or
+
+```
+cd ios && pod install
+```
+
+* android
+
+
 
 ## Usage
 ```javascript
-import {DictationPanel, RNDictation} from 'react-native-dictation';
+import {DictationPanel, RNDictation} from 'react-native-speech-recognization';
 ```
