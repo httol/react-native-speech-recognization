@@ -1,16 +1,16 @@
 import React from 'react';
-import { StyleSheet,Text, TouchableNativeFeedback, View } from 'react-native';
+import { StyleSheet,Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const DictationButton = ({
     onPress,
     text,
 }) => (
     <View>
-        <TouchableNativeFeedback style={{flex:1,alignItems:'stretch'}} {...{onPress}}>
+        <TouchableWithoutFeedback style={{flex:1,alignItems:'stretch'}} {...{onPress}}>
             <View style={{...styles.container,}}>
                 <Text>{text}</Text>
             </View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
     </View>
 );
 

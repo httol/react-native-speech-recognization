@@ -3,10 +3,11 @@ import {
     View,
     Image, 
     TouchableNativeFeedback,
-    TextInput,StyleSheet, Modal} from "react-native";
+    TextInput,StyleSheet, Modal, TouchableWithoutFeedback} from "react-native";
 import TimerButton from "./TimerButton";
 import {RNDictation,dicEvent} from '../lib';
 import DictationButton from "./DictationButton";
+import { TouchableHighlight } from "react-native-gesture-handler";
 // import DictationButton from "./DictationButton";
 
 export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
@@ -14,16 +15,25 @@ export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
     const [visible,setVisible] = useState(undefined);
     const [starting,setStarting] = useState(undefined);
     
-    const startRecord = ()=>{
-        RNDictation.startRecord();
-        RNDictation.addEventListener(dicEvent.onSuccess,(text)=>{setMessage(text)});
-        RNDictation.addEventListener(dicEvent.onEnd,onEnd);
+    const startRecord = async()=>{
+        const result = await RNDictation.isSupport();
+        if(result){
+            RNDictation.startRecord();
+            RNDictation.addEventListener(dicEvent.onSuccess,(text)=>{setMessage(text)});
+            RNDictation.addEventListener(dicEvent.onEnd,onEnd);
+            RNDictation.addEventListener(dicEvent.onFailure,(error)=>{
+                console.warn(error)
+            })
+        }else{
+            alert('not supported')
+        }
     }
 
     const stopRecord=()=>{
-        RNDictation.endRecord();
         RNDictation.removeEventListener(dicEvent.onSuccess);
         RNDictation.removeEventListener(dicEvent.onEnd);
+        RNDictation.removeEventListener(dicEvent.onFailure);
+        RNDictation.endRecord();
     }
 
     const onDismiss=()=>{
@@ -67,14 +77,14 @@ export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
 
     return (
         <View style={style} >
-            <TouchableNativeFeedback onPress={show} title="Start">
+            <TouchableWithoutFeedback onPress={show} title="Start">
                 <Image style={{width:20,height:30}} source={require('../asserts/icons/micro.png')}/>
-            </TouchableNativeFeedback>
+            </TouchableWithoutFeedback>
             <Modal transparent={true} animationType='slide' visible={visible===true} {...{onRequestClose}}>
                 <>
-                    <TouchableNativeFeedback onPress={onDismiss}>
+                    <TouchableWithoutFeedback onPress={onDismiss}>
                         <View style={{position:'absolute',...StyleSheet.absoluteFillObject,backgroundColor:'black',opacity:.3}}></View>
-                    </TouchableNativeFeedback>
+                    </TouchableWithoutFeedback>
                     <View style={{paddingHorizontal:20,paddingVertical:10,position:'absolute',height:'45%',borderTopLeftRadius:20,borderTopRightRadius:20,bottom:0,justifyContent:'flex-start',backgroundColor:'white',width:'100%',}}> 
                         <View style={{flex:1,}}>
                             <TextInput 
