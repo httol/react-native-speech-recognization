@@ -1,7 +1,7 @@
 # react-native-dictation
 
 ## Getting started
-
+### README is constructing
 `$ npm install react-native-dictation --save`
 
 ### Mostly automatic installation
@@ -10,8 +10,5 @@
 
 ## Usage
 ```javascript
-import Dictation from 'react-native-dictation';
-
-// TODO: What to do with the module?
-Dictation;
+import {DictationPanel, RNDictation} from 'react-native-dictation';
 ```
