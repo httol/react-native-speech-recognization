@@ -23,7 +23,7 @@ const TimerButton = ({
                         <Image style={{width:20,height:30,tintColor:'#fff'}} source={require('../asserts/icons/micro.png')}/>
                     </View>
                  </TouchableWithoutFeedback>):
-                 (<TouchableWithoutFeedback onPress={_onStart} style={{flex:1,alignItems:'stretch'}}>
+                 (<TouchableWithoutFeedback onLongPress={_onStart} style={{flex:1,alignItems:'stretch'}}>
                     <View style={{...styles.container,backgroundColor:'#999',}}>
                         <Image style={{width:20,height:30,tintColor:'#ccc'}} source={require('../asserts/icons/micro.png')}/>
                     </View>

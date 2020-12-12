@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { 
     View,
     Image, 
-    TouchableNativeFeedback,
     TextInput,StyleSheet, Modal, TouchableWithoutFeedback} from "react-native";
 import TimerButton from "./TimerButton";
 import {RNDictation,dicEvent} from '../lib';
 import DictationButton from "./DictationButton";
-import { TouchableHighlight } from "react-native-gesture-handler";
-// import DictationButton from "./DictationButton";
 
 export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
     const [message,setMessage] = useState();
@@ -40,6 +37,7 @@ export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
         setVisible(undefined);
         if(starting){
             stopRecord();
+            setStarting(false)
         }
     }    
 
@@ -89,7 +87,7 @@ export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
                         <View style={{flex:1,}}>
                             <TextInput 
                                 value={message}  
-                                style={{textAlignVertical:'top',fontSize:16,height:'100%',includeFontPadding:false}}
+                                style={{textAlignVertical:'top',fontSize:13,height:'100%',includeFontPadding:false}}
                                 placeholder={starting?"请说，我在聆听...":"点击麦克风，开始说话..."}
                                 editable={false} 
                                 numberOfLines={10}
