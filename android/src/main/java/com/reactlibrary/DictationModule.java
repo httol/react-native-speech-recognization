@@ -89,7 +89,6 @@ public class DictationModule extends ReactContextBaseJavaModule {
         Log.d(TAG, "endRecord() ");
         if (mAsrRecognizer != null) {
             mAsrRecognizer.stopListening();
-            reactContext.getJSModule(RCTDeviceEventEmitter.class).emit("onEnd", null);
         }
     }
 
