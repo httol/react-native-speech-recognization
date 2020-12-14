@@ -1,7 +1,7 @@
 {
   "name": "react-native-speech-recognization",
   "title": "React Native Speech Recognization",
-  "version": "0.0.4-development",
+  "version": "0.0.4",
   "description": "React Native speech recognization for both ios and Android, now only support local recognization",
   "main": "index.js",
   "files": [
