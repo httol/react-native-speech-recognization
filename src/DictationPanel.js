@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     View,
     Image, 
@@ -23,6 +23,10 @@ export const DictationPanel = ({style,
     const [visible,setVisible] = useState(undefined);
     const [starting,setStarting] = useState(undefined);
     
+    useEffect(()=>{
+        RNDictation.setLanguage('ja');
+    },[]);
+
     const startRecord = async()=>{
         const result = await RNDictation.isSupport();
         if(result){
@@ -33,7 +37,7 @@ export const DictationPanel = ({style,
                 console.warn(error)
             })
         }else{
-            alert('not supported')
+            alert('Not Supported your Device')
         }
     }
 
@@ -106,9 +110,9 @@ export const DictationPanel = ({style,
                                 {...textInputStyle}/>
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                            <DictationButton btnStyle={{...clearbtnStyle,width:'33%'}} onPress={clear} text={clearText||'Clear'}/> 
-                            <TimerButton style={{alignSelf:'center',width:'33%'}} active={starting}  {...{onStart}} {...{onEnd}}/>
-                            <DictationButton btnStyle={{...confirmBtnStyle,width:'33%'}} onPress={onConfirm} text={confirmText||'Confirm'}/> 
+                            <DictationButton containerStyle={{flex:1,alignItems:'flex-start'}}  btnStyle={{...clearbtnStyle}} onPress={clear} text={clearText||'Clear'}/> 
+                            <TimerButton style={{alignSelf:'center'}} active={starting}  {...{onStart}} {...{onEnd}}/>
+                            <DictationButton containerStyle={{flex:1,alignItems:'flex-end'}} btnStyle={{...confirmBtnStyle}} onPress={onConfirm} text={confirmText||'Confirm'}/> 
                         </View>
                     </View>
                 </>

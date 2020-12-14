@@ -5,5 +5,6 @@
    RCT_EXTERN_METHOD(endRecord)
    RCT_EXTERN_METHOD(isSupport:(RCTPromiseResolveBlock)resolve
                      rejecter:(RCTPromiseRejectBlock)reject)
+   RCT_EXTERN_METHOD(setLanguage:(NSString)local)
 @end
 

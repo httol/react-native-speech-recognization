@@ -13,7 +13,7 @@ import Speech
 @available(iOS 10.0, *)
 class Dictation: RCTEventEmitter {
     let audioEngine = AVAudioEngine()
-    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer(locale:Locale.init(identifier: "zh-cn"))
+    var speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let requestAudio = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask:SFSpeechRecognitionTask?
     
@@ -53,6 +53,11 @@ class Dictation: RCTEventEmitter {
     }
     
     @objc
+    func setLanguage(_ local:String) -> Void {
+        self.speechRecognizer = SFSpeechRecognizer(locale:Locale.init(identifier: local));
+    }
+    
+    @objc
     func startRecord() -> Void {
         if self.isRecording {
             return
@@ -74,7 +79,7 @@ class Dictation: RCTEventEmitter {
         }
         catch
         {
-           
+            
         }
         
         let myRecognizer = SFSpeechRecognizer()
@@ -109,7 +114,7 @@ class Dictation: RCTEventEmitter {
             requestAudio.endAudio()
             audioEngine.stop()
             audioEngine.inputNode.removeTap(onBus: 0)
-
+            
             self.isRecording = false
         }
     }

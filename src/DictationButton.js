@@ -4,9 +4,10 @@ import { StyleSheet,Text, TouchableWithoutFeedback, View } from 'react-native';
 const DictationButton = ({
     onPress,
     text,
-    btnStyle
+    btnStyle,
+    containerStyle
 }) => (
-    <View>
+    <View style={containerStyle}>
         <TouchableWithoutFeedback style={{flex:1,...btnStyle,}} {...{onPress}}>
             <View style={{...styles.container,}}>
                 <Text>{text}</Text>
