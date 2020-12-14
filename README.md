@@ -64,7 +64,7 @@ import {RNDictation,dicEvent} from 'react-native-speech-recognization'
 //this method is help you to get whether supported your device 
 RNDictation.isSupport();
 
-//setLanguage
+//setLanguage, Only form ios
 //Before startRecord, you can set language for recognize (Default en-US)
 RNDictation.setLanguage('en-US');
 
