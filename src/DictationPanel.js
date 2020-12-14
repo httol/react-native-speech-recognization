@@ -7,7 +7,18 @@ import TimerButton from "./TimerButton";
 import {RNDictation,dicEvent} from '../lib';
 import DictationButton from "./DictationButton";
 
-export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
+export const DictationPanel = ({style,
+    textInputStyle,
+    clearText,
+    clearbtnStyle,
+    confirmText,
+    confirmBtnStyle,
+    modalStyle,
+    listenPlaceHolder,
+    sayPlaceHolder,
+    onStartRecord,
+    onEndRecord,
+    onComplete})=>{
     const [message,setMessage] = useState();
     const [visible,setVisible] = useState(undefined);
     const [starting,setStarting] = useState(undefined);
@@ -78,7 +89,7 @@ export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
             <TouchableWithoutFeedback onPress={show} title="Start">
                 <Image style={{width:20,height:30}} source={require('../asserts/icons/micro.png')}/>
             </TouchableWithoutFeedback>
-            <Modal transparent={true} animationType='slide' visible={visible===true} {...{onRequestClose}}>
+            <Modal transparent={true} animationType='slide' visible={visible===true} {...modalStyle} {...{onRequestClose}}>
                 <>
                     <TouchableWithoutFeedback onPress={onDismiss}>
                         <View style={{position:'absolute',...StyleSheet.absoluteFillObject,backgroundColor:'black',opacity:.3}}></View>
@@ -88,15 +99,16 @@ export const DictationPanel = ({style,onStartRecord,onEndRecord,onComplete})=>{
                             <TextInput 
                                 value={message}  
                                 style={{textAlignVertical:'top',fontSize:13,height:'100%',includeFontPadding:false}}
-                                placeholder={starting?"请说，我在聆听...":"点击麦克风，开始说话..."}
+                                placeholder={starting?listenPlaceHolder||"Listening...": sayPlaceHolder|| "Please say..."}
                                 editable={false} 
                                 numberOfLines={10}
-                                multiline={true}/>
+                                multiline={true}
+                                {...textInputStyle}/>
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                            <DictationButton onPress={clear} text="清空"/> 
-                            <TimerButton style={{alignSelf:'center'}} active={starting}  {...{onStart}} {...{onEnd}}/>
-                            <DictationButton onPress={onConfirm} text="确定"/> 
+                            <DictationButton btnStyle={{...clearbtnStyle,width:'33%'}} onPress={clear} text={clearText||'Clear'}/> 
+                            <TimerButton style={{alignSelf:'center',width:'33%'}} active={starting}  {...{onStart}} {...{onEnd}}/>
+                            <DictationButton btnStyle={{...confirmBtnStyle,width:'33%'}} onPress={onConfirm} text={confirmText||'Confirm'}/> 
                         </View>
                     </View>
                 </>

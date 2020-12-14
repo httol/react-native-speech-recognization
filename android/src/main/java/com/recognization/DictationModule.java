@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.recognization;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,22 +10,17 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.huawei.hiai.asr.AsrConstants;
 import com.huawei.hiai.asr.AsrError;
 import com.huawei.hiai.asr.AsrListener;
 import com.huawei.hiai.asr.AsrRecognizer;
-import com.reactlibrary.util.StoragePermission;
-import com.reactlibrary.util.Util;
+import com.recognization.util.StoragePermission;
+import com.recognization.util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.facebook.react.modules.core.DeviceEventManagerModule.*;
 

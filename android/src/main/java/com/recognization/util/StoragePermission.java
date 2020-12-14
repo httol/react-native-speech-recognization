@@ -1,4 +1,4 @@
-package com.reactlibrary.util;
+package com.recognization.util;
 
 import android.Manifest;
 import android.app.Activity;
