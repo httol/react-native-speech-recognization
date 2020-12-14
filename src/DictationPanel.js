@@ -18,13 +18,15 @@ export const DictationPanel = ({style,
     sayPlaceHolder,
     onStartRecord,
     onEndRecord,
-    onComplete})=>{
+    onComplete,
+    language
+  })=>{
     const [message,setMessage] = useState();
     const [visible,setVisible] = useState(undefined);
     const [starting,setStarting] = useState(undefined);
     
     useEffect(()=>{
-        RNDictation.setLanguage('ja');
+        RNDictation.setLanguage(language||'en-US');
     },[]);
 
     const startRecord = async()=>{

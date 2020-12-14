@@ -69,6 +69,7 @@ export default class App extends Component<{}> {
         />
         <Space />
         <DictationPanel
+          language="zh-CN"
           onStartRecord={() => {
             this.setState({status: 'Listening...'});
           }}

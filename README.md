@@ -84,17 +84,12 @@ RNDictation.removeEventListener(dicEvent.onStart);
 RNDictation.removeEventListener(dicEvent.onSuccess);
 RNDictation.removeEventListener(dicEvent.onFailure);
 ```
-- Reference for [ios-languange-code](https://www.html.am/reference/iso-language-codes.cfm)
 
 ```javascript
 import {DictationPanel,RNDictation} from 'react-native-speech-recognization';
 
 export default class App extends Component<{}> {
   ...
-
-  componentDidMount(){
-     RNDictation.setLanguage('en-US');
-  }
 
   render() {
     return (
@@ -105,6 +100,7 @@ export default class App extends Component<{}> {
            console.log(result);
         }}/>
         <DictationPanel
+          language="en-US"
           onStartRecord={() => {
             this.setState({status: 'Listening...'});
           }}
@@ -123,3 +119,5 @@ export default class App extends Component<{}> {
 }
 
 ```
+
+- Reference for [languange-code](http://www.lingoes.net/en/translator/langcode.htm)
