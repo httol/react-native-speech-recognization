@@ -50,8 +50,6 @@ Under ios because implemented by swift, so you need to do addtion steps by this 
     ```
 
 ## Usage
-
-- Directly use `<DictationPanel/>`
   
 - Use class RNDictation to implement depends on your own needs
   
@@ -84,6 +82,8 @@ RNDictation.removeEventListener(dicEvent.onStart);
 RNDictation.removeEventListener(dicEvent.onSuccess);
 RNDictation.removeEventListener(dicEvent.onFailure);
 ```
+
+- Directly use `<DictationPanel/>`
 
 ```javascript
 import {DictationPanel,RNDictation} from 'react-native-speech-recognization';
