@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { 
     View,
     Image, 
@@ -12,23 +12,19 @@ export const DictationPanel = ({style,
     clearText,
     clearbtnStyle,
     confirmText,
+    iconStyle,
     confirmBtnStyle,
+    bottomViewStyle,
     modalStyle,
     listenPlaceHolder,
     sayPlaceHolder,
     onStartRecord,
     onEndRecord,
-    onComplete,
-    language
-  })=>{
+    onComplete})=>{
     const [message,setMessage] = useState();
     const [visible,setVisible] = useState(undefined);
     const [starting,setStarting] = useState(undefined);
     
-    useEffect(()=>{
-        RNDictation.setLanguage(language||'en-US');
-    },[]);
-
     const startRecord = async()=>{
         const result = await RNDictation.isSupport();
         if(result){
@@ -39,7 +35,7 @@ export const DictationPanel = ({style,
                 console.warn(error)
             })
         }else{
-            alert('Not Supported your Device')
+            alert('not supported')
         }
     }
 
@@ -93,7 +89,7 @@ export const DictationPanel = ({style,
     return (
         <View style={style} >
             <TouchableWithoutFeedback onPress={show} title="Start">
-                <Image style={{width:20,height:30}} source={require('../asserts/icons/micro.png')}/>
+                <Image style={{width:20,height:30,...iconStyle}} source={require('../asserts/icons/micro.png')}/>
             </TouchableWithoutFeedback>
             <Modal transparent={true} animationType='slide' visible={visible===true} {...modalStyle} {...{onRequestClose}}>
                 <>
@@ -111,10 +107,10 @@ export const DictationPanel = ({style,
                                 multiline={true}
                                 {...textInputStyle}/>
                         </View>
-                        <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                            <DictationButton containerStyle={{flex:1,alignItems:'flex-start'}}  btnStyle={{...clearbtnStyle}} onPress={clear} text={clearText||'Clear'}/> 
+                        <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',...bottomViewStyle}}>
+                            <DictationButton btnStyle={{...clearbtnStyle,width:'33%'}} onPress={clear} text={clearText||'Clear'}/> 
                             <TimerButton style={{alignSelf:'center'}} active={starting}  {...{onStart}} {...{onEnd}}/>
-                            <DictationButton containerStyle={{flex:1,alignItems:'flex-end'}} btnStyle={{...confirmBtnStyle}} onPress={onConfirm} text={confirmText||'Confirm'}/> 
+                            <DictationButton btnStyle={{...confirmBtnStyle,width:'33%'}} onPress={onConfirm} text={confirmText||'Confirm'}/> 
                         </View>
                     </View>
                 </>
